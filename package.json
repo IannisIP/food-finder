@@ -1,0 +1,19 @@
+{
+  "name": "food-finder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IannisIP/food-finder.git"
+  },
+  "author": "Iannis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IannisIP/food-finder/issues"
+  },
+  "homepage": "https://github.com/IannisIP/food-finder#readme"
+}
