@@ -1,6 +1,6 @@
 <template>
 	<div id="footer">
-		Copyright © 2020 IT Essentials
+		Copyright © 2020 Food Finder
 	</div>
 </template>
 

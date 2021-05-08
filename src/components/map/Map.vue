@@ -1,8 +1,10 @@
 <template>
-	<l-map style="height: 350px" :zoom="zoom" :center="center">
-		<l-tile-layer :url="url"></l-tile-layer>
-		<restaurant :markerLatLng="markerLatLng" />
-	</l-map>
+	<div style="height: calc(100vh - 64px); width: 100%">
+		<l-map style="height: calc(100vh - 64px)" :zoom="zoom" :center="center">
+			<l-tile-layer :url="url"></l-tile-layer>
+			<restaurant :markerLatLng="markerLatLng" />
+		</l-map>
+	</div>
 </template>
 
 <script>

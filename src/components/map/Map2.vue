@@ -63,14 +63,14 @@ export default {
 	},
 	data() {
 		return {
-			zoom: 13,
+			zoom: 20,
 			center: latLng(47.41322, -1.219482),
 			url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 			attribution:
 				'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 			withPopup: latLng(47.41322, -1.219482),
 			withTooltip: latLng(47.41422, -1.250482),
-			currentZoom: 11.5,
+			// currentZoom: 11.5,
 			currentCenter: latLng(47.41322, -1.219482),
 			showParagraph: false,
 			mapOptions: {

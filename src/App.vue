@@ -1,6 +1,6 @@
 <template>
 	<v-app id="app">
-		<!-- <Header /> -->
+		<Header />
 		<v-main id="content">
 			<router-view></router-view>
 		</v-main>
@@ -9,13 +9,13 @@
 </template>
 
 <script>
-// import Header from "./shared-components/Header";
+import Header from "./shared-components/Header";
 // import Footer from "./shared-components/Footer";
 import { onMounted } from "@vue/composition-api";
 
 export default {
 	components: {
-		// Header,
+		Header,
 		// Footer,
 	},
 
@@ -31,7 +31,10 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style>
+html {
+	overflow: hidden;
+}
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;

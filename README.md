@@ -1,4 +1,4 @@
-# ITEssentials fe
+# food-finder fe
 
 https://itessentials-basic-web-app.herokuapp.com/
 

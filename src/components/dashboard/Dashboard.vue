@@ -1,22 +1,24 @@
 <template>
 	<div class="ff-dashboard-container">
-		<Map2 />
+		<restaurants-list />
+		<Map />
 	</div>
 </template>
 
 <script>
-import Map2 from "../map/Map2";
+import Map from "../map/Map";
+import RestaurantsList from "../restaurants/RestaurantsList";
 
 export default {
 	components: {
-		Map2,
+		Map,
+		RestaurantsList,
 	},
 };
 </script>
 
 <style scoped>
 .ff-dashboard-container {
-	width: 1000px;
-	height: 1000px;
+	display: flex;
 }
 </style>

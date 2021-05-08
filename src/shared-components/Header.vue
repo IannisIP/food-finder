@@ -2,12 +2,14 @@
 	<div>
 		<v-app-bar color="white">
 			<v-toolbar-title id="toolbar-title" @click="goHome"
-				>IT Essentials</v-toolbar-title
+				>Food Finder</v-toolbar-title
 			>
 			<v-spacer></v-spacer>
-			<v-btn icon>
-				<v-icon>mdi-magnify</v-icon>
-			</v-btn>
+
+			<div class="search-input-container">
+				<v-text-field prepend-icon="mdi-magnify"></v-text-field>
+			</div>
+
 			<v-btn icon>
 				<v-icon>mdi-heart</v-icon>
 			</v-btn>
@@ -52,5 +54,24 @@ export default {
 
 #toolbar-title {
 	cursor: pointer;
+}
+
+.search-input-container {
+	width: 300px;
+
+	::v-deep .v-input {
+		max-width: 450px;
+		border-radius: 8px !important;
+		border-top-left-radius: 8px !important;
+		border-top-right-radius: 8px !important;
+		border-bottom-right-radius: 8px !important;
+		border-bottom-left-radius: 8px !important;
+		background-color: #c6d8ff !important;
+		border-color: #c6d8ff !important;
+	}
+
+	::v-deep .v-text-field__details {
+		display: none;
+	}
 }
 </style>
