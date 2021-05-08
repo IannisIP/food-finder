@@ -9,13 +9,11 @@
 			<div class="search-input-container">
 				<v-text-field prepend-icon="mdi-magnify"></v-text-field>
 			</div>
-
-			<v-btn icon>
+			<v-btn icon @click="openFavorites">
 				<v-icon>mdi-heart</v-icon>
 			</v-btn>
 			<v-btn icon @click="openCart">
-				<v-icon>mdi-cart</v-icon>
-				<span v-show="orderAmount" id="product-counter">{{ orderAmount }}</span>
+				<v-icon>mdi-account</v-icon>
 			</v-btn>
 		</v-app-bar>
 	</div>
@@ -32,6 +30,9 @@ export default {
 			}),
 			openCart: () => {
 				router.push("/cart/products");
+			},
+			openFavorites: () => {
+				router.push("/favorites");
 			},
 			goHome: () => {
 				router.push("/");
