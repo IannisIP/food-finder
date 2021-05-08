@@ -1,0 +1,45 @@
+{
+	"products": [
+		{
+			"id": 1,
+			"title": "Mouse gaming Razer DeathAdder Essential",
+			"price": 120,
+			"image": "https://s13emagst.akamaized.net/products/16892/16891644/images/res_dfef25a7e8bc261567ae0d357137e884.jpg?width=450&height=450&hash=78EF1F7950D206B2DA18FFE55610801F",
+			"description": "Some good gaming mouse"
+		},
+		{
+			"id": 2,
+			"title": "Tastatura Hyperx Alloy",
+			"price": 120,
+			"image": "https://s13emagst.akamaized.net/products/27500/27499818/images/res_9db0e81876bc5df75758703264db0eb7.jpg?width=450&height=450&hash=27143FE66DE5EF22252A91195BFCEC94",
+			"description": "Some good gaming mouse"
+		},
+		{
+			"id": 3,
+			"title": "Laptop",
+			"price": 120,
+			"image": "https://s13emagst.akamaized.net/products/30931/30930767/images/res_0f8553c11f335f9d176c957fc50324d3.jpg?width=450&height=450&hash=2FC1A2213C6A816EBF4FA9AE11784AFF",
+			"description": "Some good gaming mouse"
+		},
+		{
+			"id": 4,
+			"title": "Monitor",
+			"price": 120,
+			"image": "https://s13emagst.akamaized.net/products/26849/26848685/images/res_7719f04675d1ff48ecfed67ac0758a5d.jpg?width=450&height=450&hash=820300CFFB5792C88C3938743AE1CEAF",
+			"description": "Some good gaming mouse"
+		},
+		{
+			"id": 5,
+			"title": "Tastatura Razer",
+			"price": 120,
+			"image": "https://s13emagst.akamaized.net/products/27146/27145356/images/res_4e09efb993ebc1128db729b42497916f.jpg?width=450&height=450&hash=9B0E7F0D995EFEF72588B186FDEEEE75",
+			"description": "Some good gaming mouse"
+		},
+		{
+			"id": 6,
+			"title": "Altceva gaming",
+			"price": 120,
+			"description": "Some good gaming mouse"
+		}
+	]
+}
