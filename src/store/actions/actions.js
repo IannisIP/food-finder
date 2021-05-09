@@ -1,10 +1,10 @@
-import ProductsService from "../../services/ProductsService";
+import RestaurantsService from "../../services/RestaurantsService";
 
 export const actions = {
-	GET_PRODUCTS: async ({ commit }) => {
+	GET_RESTAURANTS: async ({ commit }) => {
 		commit("LOADING", true);
-		const products = await ProductsService.getProducts("mockURL");
+		const restaurants = await RestaurantsService.getRestaurants("mockURL");
 		commit("LOADING", false);
-		commit("SET_PRODUCTS", products);
+		commit("SET_RESTAURANTS", restaurants);
 	},
 };

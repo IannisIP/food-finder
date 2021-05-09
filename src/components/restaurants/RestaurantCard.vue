@@ -1,18 +1,11 @@
 <template>
-	<v-card :loading="loading" class="mx-auto my-1" max-width="374">
-		<template slot="progress">
-			<v-progress-linear
-				color="deep-purple"
-				height="10"
-				indeterminate
-			></v-progress-linear>
-		</template>
-
+	<v-card class="mx-auto my-1" max-width="374">
 		<v-img
+			v-if="restaurant.picture"
 			height="250"
 			src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
 		></v-img>
-		<v-card-title>Cafe Badilico</v-card-title>
+		<v-card-title>{{ restaurant.name }}</v-card-title>
 		<v-card-text>
 			<v-row align="center" class="mx-0">
 				<v-rating
@@ -30,13 +23,35 @@
 			</v-row>
 
 			<div class="my-4 subtitle-1">
-				$ • Italian, Cafe
+				$
 			</div>
 
 			<div>
-				Small plates, salads & sandwiches - an intimate setting with 12 indoor
-				seats plus patio seating.
+				<div
+					class="ff-restaurant-services"
+					v-for="(service, i) in restaurant.services"
+					:key="i"
+				>
+					{{ service }}
+				</div>
 			</div>
 		</v-card-text>
 	</v-card>
 </template>
+
+<script>
+export default {
+	props: {
+		restaurant: {
+			type: Object,
+		},
+	},
+};
+</script>
+
+<style scoped>
+.ff-restaurant-services {
+	margin-left: 1px;
+	margin-right: 1px;
+}
+</style>

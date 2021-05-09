@@ -1,6 +1,6 @@
 <template>
-	<l-marker :lat-lng="markerLatLng">
-		<l-popup>Hello!</l-popup>
+	<l-marker :lat-lng="[restaurant.lat, restaurant.lng]">
+		<l-popup>{{ restaurant.name }}</l-popup>
 	</l-marker>
 </template>
 
@@ -13,8 +13,8 @@ export default {
 		LPopup,
 	},
 	props: {
-		markerLatLng: {
-			type: Array,
+		restaurant: {
+			type: Object,
 		},
 	},
 };

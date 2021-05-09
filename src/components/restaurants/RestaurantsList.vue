@@ -1,6 +1,10 @@
 <template>
 	<div class="ff-restaurant-list">
-		<restaurant-card v-for="restaurant in restaurants" :key="restaurant.id" />
+		<restaurant-card
+			v-for="restaurant in restaurants"
+			:key="restaurant.id"
+			:restaurant="restaurant"
+		/>
 	</div>
 </template>
 
@@ -11,10 +15,10 @@ export default {
 	components: {
 		RestaurantCard,
 	},
-	setup() {
-		return {
-			restaurants: [{ id: 1 }, { id: 2 }, { id: 3 }],
-		};
+	props: {
+		restaurants: {
+			type: Array,
+		},
 	},
 };
 </script>

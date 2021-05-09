@@ -21,12 +21,9 @@ export default {
 
 	setup(props, { root }) {
 		onMounted(() => {
-			root.$store.dispatch("GET_PRODUCTS");
-			root.$store.dispatch("cart/GET_ORDER");
+			root.$store.dispatch("GET_RESTAURANTS");
+			//root.$store.dispatch("cart/GET_ORDER");
 		});
-		return {
-			gigi: "HEEELEL",
-		};
 	},
 };
 </script>

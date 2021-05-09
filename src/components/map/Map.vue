@@ -2,7 +2,11 @@
 	<div style="height: calc(100vh - 64px); width: 100%">
 		<l-map style="height: calc(100vh - 64px)" :zoom="zoom" :center="center">
 			<l-tile-layer :url="url"></l-tile-layer>
-			<restaurant :markerLatLng="markerLatLng" />
+			<restaurant
+				v-for="restaurant in restaurants"
+				:restaurant="restaurant"
+				:key="restaurant.id"
+			/>
 		</l-map>
 	</div>
 </template>
@@ -18,12 +22,16 @@ export default {
 		LTileLayer,
 		Restaurant,
 	},
+	props: {
+		restaurants: {
+			type: Array,
+		},
+	},
 	setup() {
 		return {
 			url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 			zoom: 8,
 			center: [47.31322, -1.319482],
-			markerLatLng: [47.31322, -1.319482],
 		};
 	},
 };

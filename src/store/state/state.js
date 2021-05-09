@@ -1,4 +1,4 @@
 export const state = {
-	products: [],
+	restaurants: [],
 	loading: false,
 };

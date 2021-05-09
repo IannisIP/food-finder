@@ -1,6 +1,6 @@
 export const getters = {
-	GET_PRODUCTS: (state) => {
-		return state.products;
+	GET_RESTAURANTS: (state) => {
+		return state.restaurants;
 	},
 	LOADING: (state) => {
 		return state.loading;
