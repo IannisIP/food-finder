@@ -129,10 +129,15 @@ export default {
 
 	::v-deep .v-input__prepend-outer {
 		padding-top: 5px;
+		padding-left: 5px;
 	}
 
 	::v-deep .v-input__control {
 		padding-right: 10px;
+	}
+
+	::v-deep .v-input__control > .v-input__slot:before {
+		border: 0;
 	}
 }
 </style>

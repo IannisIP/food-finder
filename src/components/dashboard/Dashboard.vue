@@ -2,18 +2,22 @@
 	<div class="ff-dashboard-container">
 		<restaurants-list :restaurants="restaurants" />
 		<Map :restaurants="restaurants" />
+		<loading-overlay v-if="!restaurants.length" />
 	</div>
 </template>
 
 <script>
-import { computed } from "@vue/composition-api";
 import Map from "../map/Map";
 import RestaurantsList from "../restaurants/RestaurantsList";
+import LoadingOverlay from "../../shared-components/LoadingOverlay";
+
+import { computed } from "@vue/composition-api";
 
 export default {
 	components: {
 		Map,
 		RestaurantsList,
+		LoadingOverlay,
 	},
 	setup(props, context) {
 		const store = context.root.$store;
@@ -30,5 +34,9 @@ export default {
 <style scoped>
 .ff-dashboard-container {
 	display: flex;
+}
+
+::v-deep .v-overlay {
+	z-index: 999 !important;
 }
 </style>

@@ -1,7 +1,13 @@
 <template>
 	<div style="height: calc(100vh - 64px); width: 100%">
-		<l-map style="height: calc(100vh - 64px)" :zoom="zoom" :center="center">
-			<l-tile-layer :url="url"></l-tile-layer>
+		<l-map
+			ref="mapRef"
+			style="height: calc(100vh - 64px)"
+			:zoom="state.zoom"
+			:center="state.center"
+			@ready="saveRef()"
+		>
+			<l-tile-layer :url="state.url"></l-tile-layer>
 			<restaurant
 				v-for="restaurant in restaurants"
 				:restaurant="restaurant"
@@ -12,6 +18,7 @@
 </template>
 
 <script>
+import { onMounted, reactive, ref } from "@vue/composition-api";
 import { LMap, LTileLayer } from "vue2-leaflet";
 import Restaurant from "./Restaurant.vue";
 
@@ -27,12 +34,27 @@ export default {
 			type: Array,
 		},
 	},
-	setup() {
-		return {
+	setup(props, context) {
+		const store = context.root.$store;
+
+		const state = reactive({
 			url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 			zoom: 8,
 			center: [47.31322, -1.319482],
+			mapRef: ref(null),
+		});
+
+		onMounted(() => {
+			navigator?.geolocation?.getCurrentPosition((position) => {
+				state.center = [position.coords.latitude, position.coords.longitude];
+			});
+		});
+
+		const saveRef = () => {
+			store.dispatch("SET_MAP", context.refs.mapRef.mapObject);
 		};
+
+		return { state, saveRef };
 	},
 };
 </script>

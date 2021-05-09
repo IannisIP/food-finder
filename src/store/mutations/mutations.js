@@ -5,4 +5,7 @@ export const mutations = {
 	LOADING(state, loading) {
 		state.loading = loading;
 	},
+	SET_MAP(state, map) {
+		state.map = map;
+	},
 };

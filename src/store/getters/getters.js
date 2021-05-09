@@ -5,6 +5,9 @@ export const getters = {
 	LOADING: (state) => {
 		return state.loading;
 	},
+	MAP: (state) => {
+		return state.map;
+	},
 	GET_PRODUCTS_BY_ORDER: (state, getters) => {
 		const orders = getters["cart/GET_ORDER"];
 		const products = getters["GET_PRODUCTS"];
