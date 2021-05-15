@@ -6,6 +6,7 @@
 			:zoom="state.zoom"
 			:center="state.center"
 			@ready="saveRef()"
+			:options="{ zoomControl: false }"
 		>
 			<l-tile-layer :url="state.url"></l-tile-layer>
 			<restaurant
@@ -13,13 +14,14 @@
 				:restaurant="restaurant"
 				:key="restaurant.id"
 			/>
+			<l-control-zoom position="bottomright"></l-control-zoom>
 		</l-map>
 	</div>
 </template>
 
 <script>
 import { onMounted, reactive, ref } from "@vue/composition-api";
-import { LMap, LTileLayer } from "vue2-leaflet";
+import { LMap, LTileLayer, LControlZoom } from "vue2-leaflet";
 import Restaurant from "./Restaurant.vue";
 
 export default {
@@ -27,6 +29,7 @@ export default {
 	components: {
 		LMap,
 		LTileLayer,
+		LControlZoom,
 		Restaurant,
 	},
 	props: {
@@ -42,6 +45,7 @@ export default {
 			zoom: 8,
 			center: [47.31322, -1.319482],
 			mapRef: ref(null),
+			zoomOptions: { position: "topright" },
 		});
 
 		onMounted(() => {

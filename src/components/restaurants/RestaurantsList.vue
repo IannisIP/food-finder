@@ -27,6 +27,6 @@ export default {
 .ff-restaurant-list {
 	height: calc(100vh - 64px);
 	overflow-y: scroll;
-	width: 550px;
+	width: 400px;
 }
 </style>

@@ -7,10 +7,20 @@ export const actions = {
 		commit("LOADING", false);
 		commit("SET_RESTAURANTS", restaurants);
 	},
+	GET_REVIEWS: async ({ commit }) => {
+		const reviews = await RestaurantsService.getReviews("mockURL");
+		commit("SET_REVIEWS", reviews);
+	},
 	SET_MAP: ({ commit }, map) => {
 		commit("SET_MAP", map);
 	},
 	FLY_TO: ({ getters }, { coords, zoom }) => {
 		getters["MAP"].flyTo(coords, zoom);
+	},
+	SET_PROPERTIES_OPEN: ({ commit }, payload) => {
+		commit("SET_PROPERTIES_OPEN", payload);
+	},
+	SET_CURRENT_SELECTION: ({ commit }, selection) => {
+		commit("SET_CURRENT_SELECTION", selection);
 	},
 };

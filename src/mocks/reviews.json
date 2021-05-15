@@ -1,0 +1,28 @@
+{
+	"reviews": [
+		{
+			"userName": "Dorel Gigel",
+			"reviewsAmount": 4,
+			"profilePicture": "",
+			"rating": 2,
+			"comment": "Foarte bun",
+			"data": "24/01/2021"
+		},
+		{
+			"userName": "Dorel Gigel2",
+			"reviewsAmount": 4,
+			"profilePicture": "",
+			"rating": 2,
+			"comment": "Foarte bun",
+			"data": "24/01/2023"
+		},
+		{
+			"userName": "Dorel Gigel2",
+			"reviewsAmount": 4,
+			"profilePicture": "",
+			"rating": 2,
+			"comment": "Foarte bun",
+			"data": "24/01/2023"
+		}
+	]
+}

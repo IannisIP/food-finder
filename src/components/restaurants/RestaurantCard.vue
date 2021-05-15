@@ -1,5 +1,5 @@
 <template>
-	<div @click="flyTo">
+	<div @click="selectionHandler">
 		<v-card class="mx-auto my-1" max-width="374">
 			<v-img
 				v-if="restaurant.picture"
@@ -51,11 +51,15 @@ export default {
 	setup(props, context) {
 		const store = context.root.$store;
 		return {
-			flyTo: () =>
+			selectionHandler: () => {
+				store.dispatch("SET_CURRENT_SELECTION", props.restaurant);
+				store.dispatch("SET_PROPERTIES_OPEN", true);
+
 				store.dispatch("FLY_TO", {
 					coords: [props.restaurant.lat, props.restaurant.lng],
 					zoom: 18,
-				}),
+				});
+			},
 		};
 	},
 };

@@ -1,4 +1,5 @@
 import mockRestaurants from "../mocks/restaurants.json";
+import mockReviews from "../mocks/reviews.json";
 
 const getRestaurants = async () => {
 	const response = new Promise((resolve) => {
@@ -6,6 +7,17 @@ const getRestaurants = async () => {
 
 		setTimeout(function() {
 			resolve(data.restaurants);
+		}, 1500);
+	});
+	return response;
+};
+
+const getReviews = async () => {
+	const response = new Promise((resolve) => {
+		const data = mockReviews;
+
+		setTimeout(function() {
+			resolve(data.reviews);
 		}, 1500);
 	});
 	return response;
@@ -67,4 +79,5 @@ export default {
 	createOrUpdateCart,
 	updateProductQuantity,
 	removeCartProduct,
+	getReviews,
 };
