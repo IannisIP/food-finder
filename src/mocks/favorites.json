@@ -1,0 +1,67 @@
+{
+	"favorites": [
+		{
+			"id": 1,
+			"name": "Restaurant A",
+			"address": "Str Petricani",
+			"services": ["Livrare acasa", "Take away", "Servire in restaurant"],
+			"picture": "",
+			"lat": 44.143235,
+			"lng": 28.62496944
+		},
+		{
+			"id": 2,
+			"name": "Restaurant B",
+			"address": "Str Petricani 123123",
+			"services": ["Livrare acasa", "Take away", "Servire in restaurant"],
+			"picture": "",
+			"lat": 44.143997,
+			"lng": 28.623928
+		},
+		{
+			"id": 3,
+			"name": "Restaurant C",
+			"address": "Str Petricani 123123",
+			"services": ["Livrare acasa", "Take away", "Servire in restaurant"],
+			"picture": "",
+			"lat": 44.144497,
+			"lng": 28.625044
+		},
+		{
+			"id": 4,
+			"name": "Restaurant D",
+			"address": "Str Petricani dasdad",
+			"services": ["Livrare acasa", "Take away", "Servire in restaurant"],
+			"picture": "",
+			"lat": 44.144892,
+			"lng": 28.62411
+		},
+		{
+			"id": 5,
+			"name": "Restaurant C",
+			"address": "Str Petricani 123123",
+			"services": ["Livrare acasa", "Take away", "Servire in restaurant"],
+			"picture": "",
+			"lat": 44.144497,
+			"lng": 28.625044
+		},
+		{
+			"id": 6,
+			"name": "Restaurant D",
+			"address": "Str Petricani dasdad",
+			"services": ["Livrare acasa", "Take away", "Servire in restaurant"],
+			"picture": "",
+			"lat": 44.144892,
+			"lng": 28.62411
+		},
+		{
+			"id": 7,
+			"name": "Restaurant D",
+			"address": "Str Petricani dasdad",
+			"services": ["Livrare acasa", "Take away", "Servire in restaurant"],
+			"picture": "",
+			"lat": 44.144892,
+			"lng": 28.62411
+		}
+	]
+}

@@ -1,5 +1,6 @@
 import mockRestaurants from "../mocks/restaurants.json";
 import mockReviews from "../mocks/reviews.json";
+import mockFavorites from "../mocks/favorites.json";
 
 const getRestaurants = async () => {
 	const response = new Promise((resolve) => {
@@ -18,6 +19,28 @@ const getReviews = async () => {
 
 		setTimeout(function() {
 			resolve(data.reviews);
+		}, 1500);
+	});
+	return response;
+};
+
+const postFavorites = async () => {
+	const response = new Promise((resolve) => {
+		const data = mockReviews;
+
+		setTimeout(function() {
+			resolve(data.reviews);
+		}, 1500);
+	});
+	return response;
+};
+
+const getFavorites = async () => {
+	const response = new Promise((resolve) => {
+		const data = mockFavorites;
+
+		setTimeout(function() {
+			resolve(data.favorites);
 		}, 1500);
 	});
 	return response;
@@ -80,4 +103,6 @@ export default {
 	updateProductQuantity,
 	removeCartProduct,
 	getReviews,
+	postFavorites,
+	getFavorites,
 };

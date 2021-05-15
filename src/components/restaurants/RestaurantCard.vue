@@ -1,5 +1,5 @@
 <template>
-	<div @click="selectionHandler">
+	<div @click="selectionHandler" class="ff-restaurant-card">
 		<v-card class="mx-auto my-1" max-width="374">
 			<v-img
 				v-if="restaurant.picture"
