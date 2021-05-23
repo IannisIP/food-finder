@@ -1,27 +1,39 @@
-import mockRestaurants from "../mocks/restaurants.json";
+// import mockRestaurants from "../mocks/restaurants.json";
 import mockReviews from "../mocks/reviews.json";
 import mockFavorites from "../mocks/favorites.json";
 
 const getRestaurants = async () => {
-	const response = new Promise((resolve) => {
-		const data = mockRestaurants;
+	const getLocations = async (position) => {
+		const response = await fetch(
+			`http://localhost:3001/restaurants/?lat=${position.coords.latitude}&lng=${position.coords.longitude}`
+		);
+		return response.json();
+	};
 
-		setTimeout(function() {
-			resolve(data.restaurants);
-		}, 1500);
+	const locations = await new Promise((resolve) => {
+		navigator?.geolocation?.getCurrentPosition((position) => {
+			resolve(getLocations(position));
+		});
 	});
-	return response;
+
+	return locations;
 };
 
-const getReviews = async () => {
-	const response = new Promise((resolve) => {
-		const data = mockReviews;
+const getReviews = async (placeId) => {
+	const response = await fetch(
+		`http://localhost:3001/details/?placeId=${placeId}`
+	);
 
-		setTimeout(function() {
-			resolve(data.reviews);
-		}, 1500);
-	});
-	return response;
+	const processedResponse = await response.json();
+	if (processedResponse.reviews) {
+		console.log(processedResponse);
+
+		return processedResponse.reviews;
+	} else {
+		console.log(processedResponse);
+
+		return null;
+	}
 };
 
 const postFavorites = async () => {
@@ -55,9 +67,6 @@ const sendOrder = async (order) => {
 		},
 		body: JSON.stringify(order),
 	});
-	// const content = await rawResponse.json();
-
-	// console.log(content);
 };
 
 const createOrUpdateCart = async (newCart) => {

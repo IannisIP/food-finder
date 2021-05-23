@@ -1,5 +1,10 @@
 <template>
-	<l-marker :lat-lng="[restaurant.lat, restaurant.lng]">
+	<l-marker
+		:lat-lng="[
+			restaurant.geometry.location.lat,
+			restaurant.geometry.location.lng,
+		]"
+	>
 		<l-popup>{{ restaurant.name }}</l-popup>
 	</l-marker>
 </template>

@@ -56,7 +56,10 @@ export default {
 				store.dispatch("SET_PROPERTIES_OPEN", true);
 
 				store.dispatch("FLY_TO", {
-					coords: [props.restaurant.lat, props.restaurant.lng],
+					coords: [
+						props.restaurant.geometry.location.lat,
+						props.restaurant.geometry.location.lng,
+					],
 					zoom: 18,
 				});
 			},

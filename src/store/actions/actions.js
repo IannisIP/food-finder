@@ -7,8 +7,9 @@ export const actions = {
 		commit("LOADING", false);
 		commit("SET_RESTAURANTS", restaurants);
 	},
-	GET_REVIEWS: async ({ commit }) => {
-		const reviews = await RestaurantsService.getReviews("mockURL");
+	GET_REVIEWS: async ({ commit, getters }) => {
+		const placeId = getters["GET_CURRENT_SELECTION"]["place_id"];
+		const reviews = await RestaurantsService.getReviews(placeId);
 		commit("SET_REVIEWS", reviews);
 	},
 	SET_MAP: ({ commit }, map) => {

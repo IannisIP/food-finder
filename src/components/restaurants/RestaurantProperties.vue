@@ -15,17 +15,25 @@
 			</div>
 		</div>
 		<div class="ff-restaurant-reviews">
-			<div class="ff-restaurant-title">{{ "Recenzii de pe FoodFinder" }}</div>
-			<div v-for="(review, i) in reviews" :key="i">
-				<review :review="review" />
+			<div v-if="reviews">
+				<div class="ff-restaurant-title">{{ "Recenzii de pe Maps" }}</div>
+				<div v-for="(review, i) in reviews" :key="i">
+					<review :review="review" />
+				</div>
+				<v-progress-circular
+					indeterminate
+					color="red"
+					v-if="!reviews.length"
+				></v-progress-circular>
 			</div>
+			<div>No maps reviews</div>
 		</div>
 	</div>
 </template>
 
 <script>
 import Review from "./partials/Review";
-import { computed, onMounted } from "@vue/composition-api";
+import { computed, onMounted, watch } from "@vue/composition-api";
 
 export default {
 	components: {
@@ -38,6 +46,12 @@ export default {
 			store.dispatch("GET_REVIEWS");
 		});
 
+		watch(
+			() => store.getters["GET_CURRENT_SELECTION"]?.name,
+			(restaurant) => {
+				restaurant && store.dispatch("GET_REVIEWS");
+			}
+		);
 		const reviews = computed(() => store.getters["GET_REVIEWS"]);
 		//TODO: here we use the selected restaurants propertis and dispatch request for getting reviews by restaurant id
 		const restaurant = computed(() => store.getters["GET_CURRENT_SELECTION"]);
@@ -73,6 +87,19 @@ export default {
 	.ff-restaurant-header {
 		display: flex;
 		justify-content: space-between;
+		margin-left: 30px;
+	}
+
+	.ff-restaurant-title {
+		display: flex;
+		margin-bottom: 24px;
+		margin-left: 30px;
+	}
+
+	.ff-restaurant-reviews {
+		margin-top: 24px;
+		overflow-y: scroll;
+		height: 400px;
 	}
 }
 </style>
