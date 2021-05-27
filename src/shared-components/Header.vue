@@ -142,19 +142,19 @@
 			</div>
 			<v-spacer></v-spacer>
 
-			<div class="admin-panel" v-if="user.isAdmin">
-				<v-btn icon>
-					<v-icon>mdi-lan-pending</v-icon>
-				</v-btn>
-				<v-btn icon>
-					<v-icon>mdi-comment-remove</v-icon>
-				</v-btn>
-				<v-btn icon>
+			<div class="admin-panel" v-if="user && user.isAdmin">
+				<v-btn icon @click="openPendingReviews">
 					<v-icon>mdi-comment-eye</v-icon>
+				</v-btn>
+				<v-btn icon @click="openReportedReviews">
+					<v-icon>mdi-comment-alert</v-icon>
+				</v-btn>
+				<v-btn icon @click="openBlacklist">
+					<v-icon>mdi-account-multiple-remove</v-icon>
 				</v-btn>
 			</div>
 
-			<v-btn icon @click="openFavorites">
+			<v-btn icon @click="openHistory" v-if="user">
 				<v-icon>mdi-history</v-icon>
 			</v-btn>
 			<v-btn icon @click="handleDialog">
@@ -167,14 +167,29 @@
 </template>
 
 <script>
-import { computed, reactive } from "@vue/composition-api";
+import { computed, onMounted, reactive } from "@vue/composition-api";
 
 import router from "@/router";
 import Login from "../components/login/Login.vue";
+import AccountService from "../services/AccountService";
+
 export default {
 	components: { Login },
 	setup(props, context) {
 		const store = context.root.$store;
+
+		onMounted(async () => {
+			const user = store.getters["GET_USER"];
+			if (!user) {
+				const jwt = localStorage.getItem("jwt");
+				if (jwt) {
+					const user = await AccountService.getUserInfo(jwt);
+					if (user) {
+						store.commit("SET_USER", user);
+					}
+				}
+			}
+		});
 
 		const state = reactive({
 			dialog: false,
@@ -187,11 +202,17 @@ export default {
 		const user = computed(() => store.getters["GET_USER"]);
 
 		return {
-			openLogin: () => {
-				//TODO
-			},
-			openFavorites: () => {
+			openHistory: () => {
 				router.push("/history/reviews");
+			},
+			openBlacklist: () => {
+				router.push("/blacklist");
+			},
+			openReportedReviews: () => {
+				router.push("/reviews/reported");
+			},
+			openPendingReviews: () => {
+				router.push("/reviews/pending");
 			},
 			goHome: () => {
 				router.push("/");

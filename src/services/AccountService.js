@@ -29,7 +29,19 @@ const loginUser = async (userInfo) => {
 	return data;
 };
 
+const getUserInfo = async (jwt) => {
+	const response = await fetch("http://localhost:3001/user-info", {
+		method: "GET",
+		headers: {
+			Accept: "application/json",
+			"x-access-token": jwt,
+		},
+	});
+	return response.json();
+};
+
 export default {
 	registerUser,
 	loginUser,
+	getUserInfo,
 };

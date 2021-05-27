@@ -6,5 +6,5 @@ export const state = {
 	currentSelection: {},
 	propertiesOpen: false,
 	loading: false,
-	user: {},
+	user: null,
 };

@@ -5,6 +5,7 @@ import ReviewsHistory from "../components/history/ReviewsHistory.vue";
 import PendingReviews from "../components/admin/PendingReviews.vue";
 import Blacklist from "../components/admin/Blacklist.vue";
 import ReportedReviews from "../components/admin/ReportedReviews.vue";
+import AccountService from "../services/AccountService";
 
 const routes = [
 	{
@@ -29,7 +30,7 @@ const routes = [
 		component: PendingReviews,
 		meta: {
 			requiresAuth: true,
-			is_admin: true,
+			isAdmin: true,
 		},
 	},
 	{
@@ -38,7 +39,7 @@ const routes = [
 		component: Blacklist,
 		meta: {
 			requiresAuth: true,
-			is_admin: true,
+			isAdmin: true,
 		},
 	},
 	{
@@ -47,7 +48,7 @@ const routes = [
 		component: ReportedReviews,
 		meta: {
 			requiresAuth: true,
-			is_admin: true,
+			isAdmin: true,
 		},
 	},
 ];
@@ -57,32 +58,29 @@ const router = new VueRouter({
 	routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
 	if (to.matched.some((record) => record.meta.requiresAuth)) {
-		if (localStorage.getItem("jwt") == null) {
+		const jwt = localStorage.getItem("jwt");
+		if (jwt === null) {
 			//daca nu e logat
 			//emit open logging dialog.
 		} else {
-			let user = JSON.parse(localStorage.getItem("user"));
+			const user = await AccountService.getUserInfo(jwt);
+
 			if (to.matched.some((record) => record.meta.isAdmin)) {
 				if (user.isAdmin === 1) {
 					next();
 				} else {
-					next({ name: "ReviewsHistory" });
+					next({ name: "Dashboard" });
 				}
 			} else {
 				next();
 			}
 		}
 	} else if (to.matched.some((record) => record.meta.guest)) {
-		if (localStorage.getItem("jwt") == null) {
-			next();
-		}
-		// else {
-		// 	next({ name: "userboard" });
-		// }
-	} else {
 		next();
+	} else {
+		next({ name: "Dashboard" });
 	}
 });
 
