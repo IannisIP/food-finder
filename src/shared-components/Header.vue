@@ -142,8 +142,20 @@
 			</div>
 			<v-spacer></v-spacer>
 
+			<div class="admin-panel" v-if="user.isAdmin">
+				<v-btn icon>
+					<v-icon>mdi-lan-pending</v-icon>
+				</v-btn>
+				<v-btn icon>
+					<v-icon>mdi-comment-remove</v-icon>
+				</v-btn>
+				<v-btn icon>
+					<v-icon>mdi-comment-eye</v-icon>
+				</v-btn>
+			</div>
+
 			<v-btn icon @click="openFavorites">
-				<v-icon>mdi-heart</v-icon>
+				<v-icon>mdi-history</v-icon>
 			</v-btn>
 			<v-btn icon @click="handleDialog">
 				<v-icon>mdi-account</v-icon>
@@ -161,7 +173,9 @@ import router from "@/router";
 import Login from "../components/login/Login.vue";
 export default {
 	components: { Login },
-	setup(props, { root }) {
+	setup(props, context) {
+		const store = context.root.$store;
+
 		const state = reactive({
 			dialog: false,
 		});
@@ -170,21 +184,21 @@ export default {
 			state.dialog = !state.dialog;
 		};
 
+		const user = computed(() => store.getters["GET_USER"]);
+
 		return {
-			orderAmount: computed(() => {
-				return root.$store.getters["cart/GET_ORDER_NO_PRODUCTS"];
-			}),
 			openLogin: () => {
 				//TODO
 			},
 			openFavorites: () => {
-				router.push("/favorites");
+				router.push("/history/reviews");
 			},
 			goHome: () => {
 				router.push("/");
 			},
 			state,
 			handleDialog,
+			user,
 		};
 	},
 };

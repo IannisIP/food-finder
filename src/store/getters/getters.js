@@ -17,4 +17,7 @@ export const getters = {
 	GET_CURRENT_SELECTION: (state) => {
 		return state.currentSelection;
 	},
+	GET_USER: (state) => {
+		return state.user;
+	},
 };

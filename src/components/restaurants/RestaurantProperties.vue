@@ -8,7 +8,8 @@
 				</v-btn>
 			</div>
 		</div>
-		<div class="ff-restaurant-details">{{ restaurant.address }}</div>
+		<!-- <div class="ff-restaurant-details">{{ restaurant.address }}</div> -->
+		<div class="ff-restaurant-details"><v-btn>Add review</v-btn></div>
 		<div class="ff-restaurant-services-container">
 			<div v-for="(service, i) in restaurant.services" :key="i">
 				<v-icon>mdi-check</v-icon> <span>{{ service }} </span>
@@ -99,7 +100,7 @@ export default {
 	.ff-restaurant-reviews {
 		margin-top: 24px;
 		overflow-y: scroll;
-		height: 400px;
+		height: 530px;
 	}
 }
 </style>

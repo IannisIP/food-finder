@@ -2,33 +2,48 @@
 	<div class="ff-review">
 		<div class="reviewer-image"><v-icon>mdi-account-circle </v-icon></div>
 		<div class="review-contents-wrapper">
-			<div class="review-contents-author">{{ review.author_name }}</div>
-			<div class="review-contents-reviews-amount">
-				{{ review.reviewsAmount }}
+			<div>
+				<div class="review-contents-author">{{ review.author_name }}</div>
+				<div class="review-contents-reviews-amount">
+					{{ review.reviewsAmount }}
+				</div>
+				<div class="review-contents-rating">
+					<v-rating
+						:value="review.rating"
+						color="amber"
+						dense
+						half-increments
+						readonly
+						size="14"
+					></v-rating>
+				</div>
+				<div class="review-contents-comment">{{ review.text }}</div>
 			</div>
-			<div class="review-contents-rating">
-				<v-rating
-					:value="review.rating"
-					color="amber"
-					dense
-					half-increments
-					readonly
-					size="14"
-				></v-rating>
-			</div>
-			<div class="review-contents-comment">{{ review.text }}</div>
+			<div class="review-sentiment">{{ sentiment }}</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import { computed } from "@vue/composition-api";
 export default {
 	props: {
 		review: {
 			type: Object,
 		},
 	},
-	setup() {},
+	setup(props) {
+		const sentiment = computed(() => {
+			return props.review.sentiment === "positive"
+				? "😀"
+				: props.review.sentiment === "neutral"
+				? "😐"
+				: "😟";
+		});
+		return {
+			sentiment,
+		};
+	},
 };
 </script>
 
@@ -46,8 +61,10 @@ export default {
 .review-contents-wrapper {
 	width: 100%;
 	margin-right: 30px;
+
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .review-contents-author,

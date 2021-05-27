@@ -1,10 +1,8 @@
 <template>
 	<div class="ff-restaurant-list">
-		<restaurant-card
-			v-for="restaurant in restaurants"
-			:key="restaurant.id"
-			:restaurant="restaurant"
-		/>
+		<diV v-for="restaurant in restaurants" :key="restaurant.id">
+			<restaurant-card v-if="restaurant.rating" :restaurant="restaurant" />
+		</diV>
 	</div>
 </template>
 

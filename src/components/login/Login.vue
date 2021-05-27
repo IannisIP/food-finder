@@ -1,5 +1,5 @@
 <template>
-	<v-dialog v-model="dialog" persistent max-width="600px" min-width="360px">
+	<v-dialog v-model="modal" max-width="600px" min-width="360px">
 		<div>
 			<v-tabs
 				v-model="state.tab"
@@ -10,9 +10,9 @@
 				grow
 			>
 				<v-tabs-slider color="purple darken-4"></v-tabs-slider>
-				<v-tab v-for="i in state.tabs" :key="i">
-					<v-icon large>{{ i.icon }}</v-icon>
-					<div class="caption py-1">{{ i.name }}</div>
+				<v-tab v-for="(tab, idx) in state.tabs" :key="idx">
+					<v-icon large>{{ tab.icon }}</v-icon>
+					<div class="caption py-1">{{ tab.name }}</div>
 				</v-tab>
 				<v-tab-item>
 					<v-card class="px-4">
@@ -48,7 +48,7 @@
 											block
 											:disabled="!state.valid"
 											color="success"
-											@click="state.validate"
+											@click="authUser"
 										>
 											Login
 										</v-btn>
@@ -122,7 +122,7 @@
 											block
 											:disabled="!state.valid"
 											color="success"
-											@click="state.validate"
+											@click="createUser"
 											>Register</v-btn
 										>
 									</v-col>
@@ -138,6 +138,8 @@
 
 <script>
 import { computed, reactive } from "@vue/composition-api";
+import AccountService from "../../services/AccountService";
+
 export default {
 	name: "Login",
 	props: {
@@ -149,13 +151,12 @@ export default {
 		},
 	},
 	setup(props, context) {
-		const dialog = computed({
+		const modal = computed({
 			get: () => props.dialog,
 			set: (value) => context.emit("changeDialog", value),
 		});
 
 		const state = reactive({
-			loginForm: context.refs.loginForm,
 			form: context.refs.form,
 			tab: 0,
 			tabs: [
@@ -189,9 +190,32 @@ export default {
 			return state.password === state.verify || "Password must match";
 		});
 
-		const validate = () => {
-			if (state.loginForm.validate()) {
-				// submit form to server/API here...
+		const authUser = async () => {
+			if (context.refs.loginForm.validate()) {
+				const userInfo = {
+					password: state.loginPassword,
+					email: state.loginEmail,
+				};
+				const response = await AccountService.loginUser(userInfo);
+				if (response.message === "Auth ok") {
+					context.root.$store.commit("SET_USER", response.user);
+					context.emit("changeDialog");
+				} else {
+					alert("Wrong username or password!");
+				}
+			}
+		};
+
+		const createUser = async () => {
+			if (context.refs.registerForm.validate()) {
+				const userInfo = {
+					firstName: state.firstName,
+					lastName: state.lastName,
+					password: state.password,
+					email: state.email,
+				};
+				await AccountService.registerUser(userInfo);
+				context.emit("changeDialog");
 			}
 		};
 		const reset = () => {
@@ -203,11 +227,12 @@ export default {
 
 		return {
 			passwordMatch,
-			validate,
+			authUser,
+			createUser,
 			resetValidation,
 			reset,
 			state,
-			dialog,
+			modal,
 		};
 	},
 };

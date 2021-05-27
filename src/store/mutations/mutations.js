@@ -17,4 +17,7 @@ export const mutations = {
 	SET_CURRENT_SELECTION: (state, selection) => {
 		state.currentSelection = selection;
 	},
+	SET_USER: (state, user) => {
+		state.user = user;
+	},
 };

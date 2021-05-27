@@ -1,7 +1,7 @@
 {
 	"reviews": [
 		{
-			"author": "Dorel Gigel",
+			"author": "Restaurant Ares",
 			"reviewsAmount": 4,
 			"profilePicture": "",
 			"rating": 2,
@@ -9,15 +9,7 @@
 			"data": "24/01/2021"
 		},
 		{
-			"author": "Dorel Gigel2",
-			"reviewsAmount": 4,
-			"profilePicture": "",
-			"rating": 2,
-			"comment": "Foarte bun",
-			"data": "24/01/2023"
-		},
-		{
-			"author": "Dorel Gigel2",
+			"author": "Restaurant Crazy",
 			"reviewsAmount": 4,
 			"profilePicture": "",
 			"rating": 2,

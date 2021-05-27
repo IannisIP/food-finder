@@ -10,7 +10,7 @@
 			<v-card-text>
 				<v-row align="center" class="mx-0">
 					<v-rating
-						:value="4.5"
+						:value="restaurant.rating"
 						color="amber"
 						dense
 						half-increments
@@ -19,7 +19,7 @@
 					></v-rating>
 
 					<div class="grey--text ml-4">
-						4.5 (413)
+						{{ restaurant.rating }} ({{ restaurant.user_ratings_total }})
 					</div>
 				</v-row>
 

@@ -2,7 +2,7 @@
 	"restaurants": [
 		{
 			"id": 1,
-			"name": "Restaurant A",
+			"name": "Restaurant Ares",
 			"address": "Str Petricani",
 			"services": ["Livrare acasa", "Take away", "Servire in restaurant"],
 			"picture": "",
@@ -11,30 +11,12 @@
 		},
 		{
 			"id": 2,
-			"name": "Restaurant B",
+			"name": "Restaurant Crazy",
 			"address": "Str Petricani 123123",
 			"services": ["Livrare acasa", "Take away", "Servire in restaurant"],
 			"picture": "",
 			"lat": 44.143997,
 			"lng": 28.623928
-		},
-		{
-			"id": 3,
-			"name": "Restaurant C",
-			"address": "Str Petricani 123123",
-			"services": ["Livrare acasa", "Take away", "Servire in restaurant"],
-			"picture": "",
-			"lat": 44.144497,
-			"lng": 28.625044
-		},
-		{
-			"id": 4,
-			"name": "Restaurant D",
-			"address": "Str Petricani dasdad",
-			"services": ["Livrare acasa", "Take away", "Servire in restaurant"],
-			"picture": "",
-			"lat": 44.144892,
-			"lng": 28.62411
 		}
 	]
 }
