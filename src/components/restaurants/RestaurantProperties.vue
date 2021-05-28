@@ -80,7 +80,7 @@ export default {
 		const state = reactive({
 			dialog: false,
 			review: "",
-			file: "",
+			file: [],
 		});
 
 		onMounted(() => {

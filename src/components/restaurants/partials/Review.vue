@@ -1,6 +1,9 @@
 <template>
 	<div class="ff-review">
-		<div class="reviewer-image"><v-icon>mdi-account-circle </v-icon></div>
+		<div class="reviewer-image">
+			<v-icon>mdi-account-circle </v-icon>
+			<v-icon v-if="review.confirmed">mdi-check-decagram</v-icon>
+		</div>
 		<div class="review-contents-wrapper">
 			<div>
 				<div class="review-contents-author">{{ review.author_name }}</div>
