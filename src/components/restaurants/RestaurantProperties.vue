@@ -18,7 +18,7 @@
 			</div>
 		</div>
 		<div class="ff-restaurant-reviews">
-			<div v-if="reviews">
+			<div v-if="reviews.length">
 				<div class="ff-restaurant-title">{{ "Recenzii de pe Maps" }}</div>
 				<div v-for="(review, i) in reviews" :key="i">
 					<review :review="review" />
@@ -29,7 +29,7 @@
 					v-if="!reviews.length"
 				></v-progress-circular>
 			</div>
-			<div>No maps reviews</div>
+			<div v-else>No maps reviews</div>
 		</div>
 		<div class="review-form">
 			<v-dialog v-model="state.dialog" max-width="600px" min-width="360px">
@@ -134,7 +134,7 @@ export default {
 	z-index: 999;
 	background: #fff;
 	width: 400px;
-	height: 600px;
+	height: 628px;
 
 	margin: 5px 0px 0px 5px;
 
