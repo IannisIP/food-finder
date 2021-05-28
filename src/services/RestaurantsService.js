@@ -26,14 +26,33 @@ const getReviews = async (placeId) => {
 
 	const processedResponse = await response.json();
 	if (processedResponse.reviews) {
-		console.log(processedResponse);
-
 		return processedResponse.reviews;
 	} else {
-		console.log(processedResponse);
-
 		return null;
 	}
+};
+
+const postReview = async ({ review, file, placeId }) => {
+	const formData = new FormData();
+	formData.append("review", review);
+	formData.append("receipt", file);
+	formData.append("placeId", placeId);
+
+	const jwt = localStorage.getItem("jwt");
+
+	if (jwt) {
+		const response = await fetch("http://localhost:3001/review", {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"x-access-token": jwt,
+			},
+			body: formData,
+		});
+		return response.json();
+	}
+
+	return { message: "JWT not found!" };
 };
 
 const postFavorites = async () => {
@@ -114,4 +133,5 @@ export default {
 	getReviews,
 	postFavorites,
 	getFavorites,
+	postReview,
 };
