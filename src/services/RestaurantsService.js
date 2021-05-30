@@ -1,7 +1,3 @@
-// import mockRestaurants from "../mocks/restaurants.json";
-import mockReviews from "../mocks/reviews.json";
-import mockFavorites from "../mocks/favorites.json";
-
 const getRestaurants = async () => {
 	const getLocations = async (position) => {
 		const response = await fetch(
@@ -39,99 +35,83 @@ const postReview = async ({ review, file, placeId }) => {
 	formData.append("placeId", placeId);
 
 	const jwt = localStorage.getItem("jwt");
+	const response = await fetch("http://localhost:3001/reviews/pending", {
+		method: "POST",
+		headers: {
+			Accept: "application/json",
+			"x-access-token": jwt,
+		},
+		body: formData,
+	});
+	return response.json();
+};
 
-	if (jwt) {
-		const response = await fetch("http://localhost:3001/review", {
-			method: "POST",
+const getPendingReviews = async () => {
+	const jwt = localStorage.getItem("jwt");
+	const response = await fetch(`http://localhost:3001/reviews/pending`, {
+		headers: {
+			"x-access-token": jwt,
+		},
+	});
+
+	const pendingReviews = await response.json();
+
+	if (pendingReviews) {
+		return pendingReviews;
+	} else {
+		return null;
+	}
+};
+
+const getReceipt = async (pendingReviewId) => {
+	const jwt = localStorage.getItem("jwt");
+	const response = await fetch(
+		`http://localhost:3001/receipt/download/?review=${pendingReviewId}`,
+		{
 			headers: {
-				Accept: "application/json",
 				"x-access-token": jwt,
 			},
-			body: formData,
-		});
-		return response.json();
-	}
-
-	return { message: "JWT not found!" };
+		}
+	);
+	const blob = await response.blob();
+	const receipt = URL.createObjectURL(blob);
+	return receipt;
 };
 
-const postFavorites = async () => {
-	const response = new Promise((resolve) => {
-		const data = mockReviews;
-
-		setTimeout(function() {
-			resolve(data.reviews);
-		}, 1500);
-	});
-	return response;
-};
-
-const getFavorites = async () => {
-	const response = new Promise((resolve) => {
-		const data = mockFavorites;
-
-		setTimeout(function() {
-			resolve(data.favorites);
-		}, 1500);
-	});
-	return response;
-};
-
-const sendOrder = async (order) => {
-	await fetch("https://httpbin.org/post", {
+const acceptPendingReview = async (data) => {
+	const jwt = localStorage.getItem("jwt");
+	const response = await fetch(`http://localhost:3001/reviews`, {
 		method: "POST",
 		headers: {
-			Accept: "application/json",
 			"Content-Type": "application/json",
+			"x-access-token": jwt,
 		},
-		body: JSON.stringify(order),
+		body: JSON.stringify({ ...data, operation: "accept" }),
 	});
+
+	return response.json();
 };
 
-const createOrUpdateCart = async (newCart) => {
-	await fetch(`https://it-essentials-basic-backend.herokuapp.com/carts`, {
+const declinePendingReview = async (data) => {
+	const jwt = localStorage.getItem("jwt");
+	const response = await fetch(`http://localhost:3001/reviews`, {
 		method: "POST",
 		headers: {
-			Accept: "application/json",
 			"Content-Type": "application/json",
+			"x-access-token": jwt,
 		},
-		body: JSON.stringify(newCart),
+		body: JSON.stringify({ ...data, operation: "decline" }),
 	});
-};
 
-const updateProductQuantity = async (updatedProduct) => {
-	await fetch(`https://it-essentials-basic-backend.herokuapp.com/carts`, {
-		method: "PUT",
-		headers: {
-			Accept: "application/json",
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			userId: 9912,
-			...updatedProduct,
-		}),
-	});
-};
-
-const removeCartProduct = async (data) => {
-	await fetch(`https://it-essentials-basic-backend.herokuapp.com/carts`, {
-		method: "DELETE",
-		headers: {
-			Accept: "application/json",
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(data),
-	});
+	return response.json();
 };
 
 export default {
 	getRestaurants,
-	sendOrder,
-	createOrUpdateCart,
-	updateProductQuantity,
-	removeCartProduct,
+	getPendingReviews,
+	declinePendingReview,
+	acceptPendingReview,
 	getReviews,
-	postFavorites,
-	getFavorites,
 	postReview,
+	getReceipt,
 };
