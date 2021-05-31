@@ -106,6 +106,17 @@ const declinePendingReview = async (data) => {
 	return response.json();
 };
 
+const getReviewHistory = async () => {
+	const jwt = localStorage.getItem("jwt");
+	const response = await fetch(`http://localhost:3001/reviews/history`, {
+		headers: {
+			"x-access-token": jwt,
+		},
+	});
+	const reviews = await response.json();
+	return reviews;
+};
+
 export default {
 	getRestaurants,
 	getPendingReviews,
@@ -114,4 +125,5 @@ export default {
 	getReviews,
 	postReview,
 	getReceipt,
+	getReviewHistory,
 };
