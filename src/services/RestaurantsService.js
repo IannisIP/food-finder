@@ -38,7 +38,6 @@ const postReview = async ({ review, file, placeId }) => {
 	const response = await fetch("http://localhost:3001/reviews/pending", {
 		method: "POST",
 		headers: {
-			Accept: "application/json",
 			"x-access-token": jwt,
 		},
 		body: formData,
@@ -117,6 +116,19 @@ const getReviewHistory = async () => {
 	return reviews;
 };
 
+const reportReview = async (reportedReview) => {
+	const jwt = localStorage.getItem("jwt");
+	const response = await fetch(`http://localhost:3001/reviews/report`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"x-access-token": jwt,
+		},
+		body: JSON.stringify(reportedReview),
+	});
+	return await response.json();
+};
+
 export default {
 	getRestaurants,
 	getPendingReviews,
@@ -126,4 +138,5 @@ export default {
 	postReview,
 	getReceipt,
 	getReviewHistory,
+	reportReview,
 };

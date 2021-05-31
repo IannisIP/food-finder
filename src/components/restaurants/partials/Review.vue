@@ -23,12 +23,48 @@
 				<div class="review-contents-comment">{{ review.text }}</div>
 			</div>
 			<div class="review-sentiment">{{ sentiment }}</div>
+			<v-menu bottom v-if="review.source">
+				<template v-slot:activator="{ on, attrs }">
+					<v-btn icon v-bind="attrs" v-on="on">
+						<v-icon>mdi-dots-vertical</v-icon>
+					</v-btn>
+				</template>
+				<v-list>
+					<v-list-item>
+						<v-list-item-title @click="handleReport">Report</v-list-item-title>
+					</v-list-item>
+				</v-list>
+			</v-menu>
 		</div>
+		<v-dialog
+			v-model="state.modal"
+			max-width="600px"
+			min-width="360px"
+			height="225px"
+		>
+			<div class="report-form-wrapper">
+				<v-form lazy-validation>
+					<v-textarea
+						label="Reason"
+						v-model="state.reason"
+						height="265px"
+					></v-textarea>
+
+					<v-spacer></v-spacer>
+					<div>
+						<v-btn color="success" @click="handleSubmitReport">
+							Submit
+						</v-btn>
+					</div>
+				</v-form>
+			</div>
+		</v-dialog>
 	</div>
 </template>
 
 <script>
-import { computed } from "@vue/composition-api";
+import { computed, reactive } from "@vue/composition-api";
+import RestaurantsService from "../../../services/RestaurantsService";
 export default {
 	props: {
 		review: {
@@ -36,6 +72,25 @@ export default {
 		},
 	},
 	setup(props) {
+		const state = reactive({
+			modal: false,
+			reason: "",
+		});
+		const handleReport = () => {
+			state.modal = !state.modal;
+		};
+
+		const handleSubmitReport = async () => {
+			state.modal = !state.modal;
+
+			const response = await RestaurantsService.reportReview({
+				id: props.review.reviewId,
+				reason: state.reason,
+			});
+
+			alert(response.message);
+		};
+
 		const sentiment = computed(() => {
 			return props.review.sentiment === "positive"
 				? "😀"
@@ -45,12 +100,15 @@ export default {
 		});
 		return {
 			sentiment,
+			handleReport,
+			state,
+			handleSubmitReport,
 		};
 	},
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .ff-review {
 	display: flex;
 	margin-left: 30px;
@@ -68,6 +126,19 @@ export default {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+.report-form-wrapper {
+	display: flex;
+	flex-direction: column;
+
+	padding-right: 10px;
+	padding-left: 10px;
+	width: 100%;
+
+	::v-deep .v-text-field__slot {
+		height: 260px;
+	}
 }
 
 .review-contents-author,

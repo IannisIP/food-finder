@@ -1,6 +1,6 @@
 <template>
 	<div class="ff-pending-container">
-		<div class="header">{{ "Pending reviews" }}</div>
+		<div class="header">{{ "Reviews added by you" }}</div>
 		<div class="pending-reviews-container">
 			<review-history
 				v-for="(review, i) in state.pendingReviews"
