@@ -6,7 +6,7 @@
 				v-for="(review, i) in state.pendingReviews"
 				:key="i"
 				:review="review"
-				@handleValidation="handleValidation($event, 'id')"
+				@handleValidation="handleValidation($event)"
 				@handleDecline="handleDecline($event, 'id')"
 			/>
 		</div>
@@ -30,12 +30,10 @@ export default {
 			state.pendingReviews = await RestaurantService.getPendingReviews();
 		});
 
-		const handleValidation = async (pendingReviewId) => {
-			const response = await RestaurantsService.acceptPendingReview({
-				id: pendingReviewId,
-			});
+		const handleValidation = async (data) => {
+			const response = await RestaurantsService.acceptPendingReview(data);
 			state.pendingReviews = await RestaurantService.getPendingReviews();
-			console.log(response.message);
+			alert(response.message);
 		};
 
 		const handleDecline = async (id) => {
@@ -66,5 +64,11 @@ export default {
 	width: 200px;
 	margin-left: 5px;
 	margin-right: 5px;
+}
+</style>
+
+<style>
+html {
+	overflow: auto;
 }
 </style>

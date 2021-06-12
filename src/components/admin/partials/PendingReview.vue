@@ -12,6 +12,24 @@
 				<div>Email: {{ review.reviewer.email }}</div>
 				<div>Review: {{ review.pendingReviewText }}</div>
 
+				<div>
+					<v-date-picker v-model="state.receiptDate"></v-date-picker>
+					<v-time-picker
+						v-model="state.receiptTime"
+						format="24hr"
+					></v-time-picker>
+					<v-text-field
+						v-model="state.cif"
+						placeholder="Firm Unique Id"
+						type="number"
+					></v-text-field>
+					<v-text-field
+						v-model="state.receiptNumber"
+						placeholder="Receipt Number"
+						type="number"
+					></v-text-field>
+				</div>
+
 				<div class="btn-wrapper">
 					<v-btn @click="handlePreview" v-if="review.hasReceipt"
 						>Preview Receipt</v-btn
@@ -43,6 +61,10 @@ export default {
 		const state = reactive({
 			modal: false,
 			receipt: undefined,
+			receiptDate: null,
+			cif: "",
+			receiptNumber: "",
+			receiptTime: null,
 		});
 
 		const handlePreview = async () => {
@@ -55,7 +77,30 @@ export default {
 		};
 
 		const handleValidate = () => {
-			context.emit("handleValidation", props.review.pendingReviewId);
+			const receiptParams = {
+				receiptDate: state.receiptDate,
+				cif: state.cif,
+				receiptNumber: state.receiptNumber,
+				receiptTime: state.receiptTime,
+			};
+
+			if (
+				state.receipt &&
+				!receiptParams.receiptDate &&
+				!receiptParams.cif &&
+				!receiptParams.receiptNumber &&
+				!receiptParams.receiptTime
+			) {
+				console.alert(
+					"Receipt Data, Receipt Time, Receipt Number must be completed."
+				);
+				return;
+			}
+
+			context.emit("handleValidation", {
+				id: props.review.pendingReviewId,
+				receiptParams: JSON.stringify(receiptParams),
+			});
 		};
 		const handleDismiss = () => {
 			context.emit("handleDecline", props.review.pendingReviewId);
