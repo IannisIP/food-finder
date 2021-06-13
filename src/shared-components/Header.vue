@@ -137,9 +137,9 @@
 			</v-toolbar-title>
 			<v-spacer></v-spacer>
 
-			<div class="search-input-container">
+			<!-- <div class="search-input-container">
 				<v-text-field prepend-icon="mdi-magnify"></v-text-field>
-			</div>
+			</div> -->
 			<v-spacer></v-spacer>
 
 			<div class="admin-panel" v-if="user && user.isAdmin">

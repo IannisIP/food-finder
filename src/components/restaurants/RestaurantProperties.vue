@@ -8,8 +8,9 @@
 				</v-btn>
 			</div>
 		</div>
-		<!-- <div class="ff-restaurant-details">{{ restaurant.address }}</div> -->
 		<div class="ff-restaurant-details">
+			<div>{{ restaurant.formatted_address }}</div>
+			<div>{{ restaurant.international_phone_number }}</div>
 			<v-btn @click="handleAddReview">Add review</v-btn>
 		</div>
 		<div class="ff-restaurant-services-container">
@@ -19,7 +20,7 @@
 		</div>
 		<div class="ff-restaurant-reviews">
 			<div v-if="reviews.length">
-				<div class="ff-restaurant-title">{{ "Recenzii de pe Maps" }}</div>
+				<div class="ff-restaurant-title">{{ "Reviews:" }}</div>
 				<div v-for="(review, i) in reviews" :key="i">
 					<review :review="review" />
 				</div>

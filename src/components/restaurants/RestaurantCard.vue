@@ -1,11 +1,6 @@
 <template>
 	<div @click="selectionHandler" class="ff-restaurant-card">
 		<v-card class="mx-auto my-1" max-width="374">
-			<v-img
-				v-if="restaurant.picture"
-				height="250"
-				src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-			></v-img>
 			<v-card-title>{{ restaurant.name }}</v-card-title>
 			<v-card-text>
 				<v-row align="center" class="mx-0">
@@ -24,7 +19,17 @@
 				</v-row>
 
 				<div class="my-4 subtitle-1">
-					$
+					{{
+						restaurant.business_status === "OPERATIONAL"
+							? `${restaurant.name} is operational`
+							: `${restaurant.name} is not operational`
+					}}
+
+					{{
+						restaurant.opening_hours && restaurant.opening_hours.open_now
+							? "and currently open"
+							: "and currently not open"
+					}}
 				</div>
 
 				<div>

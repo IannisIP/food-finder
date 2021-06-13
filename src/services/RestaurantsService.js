@@ -129,6 +129,45 @@ const reportReview = async (reportedReview) => {
 	return await response.json();
 };
 
+const getReportedReview = async () => {
+	const jwt = localStorage.getItem("jwt");
+	const response = await fetch(`http://localhost:3001/reviews/report`, {
+		headers: {
+			"x-access-token": jwt,
+		},
+	});
+	const reviews = await response.json();
+	return reviews;
+};
+
+const removeReported = async (data) => {
+	const jwt = localStorage.getItem("jwt");
+	const response = await fetch(`http://localhost:3001/reviews/report`, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+			"x-access-token": jwt,
+		},
+		body: JSON.stringify(data),
+	});
+
+	return response.json();
+};
+
+const removeReview = async (data) => {
+	const jwt = localStorage.getItem("jwt");
+	const response = await fetch(`http://localhost:3001/reviews`, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+			"x-access-token": jwt,
+		},
+		body: JSON.stringify(data),
+	});
+
+	return response.json();
+};
+
 export default {
 	getRestaurants,
 	getPendingReviews,
@@ -139,4 +178,7 @@ export default {
 	getReceipt,
 	getReviewHistory,
 	reportReview,
+	getReportedReview,
+	removeReported,
+	removeReview,
 };

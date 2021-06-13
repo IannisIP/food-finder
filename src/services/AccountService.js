@@ -23,7 +23,7 @@ const loginUser = async (userInfo) => {
 	});
 	const data = await response.json();
 
-	localStorage.setItem("user", JSON.stringify(data.user));
+	//localStorage.setItem("user", JSON.stringify(data.user));
 	localStorage.setItem("jwt", data.token);
 
 	return data;
@@ -37,7 +37,16 @@ const getUserInfo = async (jwt) => {
 			"x-access-token": jwt,
 		},
 	});
-	return response.json();
+	const jsonResponse = await response.json();
+	if (jsonResponse.message === "Failed to authenticate token.") {
+		const user = localStorage.getItem("user");
+		const jwt = localStorage.getItem("jwt");
+		user && localStorage.removeItem("user");
+		jwt && localStorage.removeItem("jwt");
+
+		alert(jsonResponse.message);
+	}
+	return jsonResponse;
 };
 
 export default {
