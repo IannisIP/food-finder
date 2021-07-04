@@ -20,6 +20,8 @@ import PendingReview from "./partials/PendingReview.vue";
 import RestaurantService from "../../services/RestaurantsService";
 import LoadingOverlay from "../../shared-components/LoadingOverlay.vue";
 import RestaurantsService from "../../services/RestaurantsService";
+import { EventBus } from "@/main.js";
+
 export default {
 	components: { PendingReview, LoadingOverlay },
 	setup() {
@@ -33,7 +35,7 @@ export default {
 		const handleValidation = async (data) => {
 			const response = await RestaurantsService.acceptPendingReview(data);
 			state.pendingReviews = await RestaurantService.getPendingReviews();
-			alert(response.message);
+			EventBus.$emit("alert", response.message);
 		};
 
 		const handleDecline = async (id) => {
@@ -41,7 +43,7 @@ export default {
 				id: id,
 			});
 			state.pendingReviews = await RestaurantService.getPendingReviews();
-			console.log(response.message);
+			EventBus.$emit("alert", response.message);
 		};
 
 		return { state, handleValidation, handleDecline };

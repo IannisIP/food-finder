@@ -1,3 +1,5 @@
+import { EventBus } from "@/main.js";
+
 const registerUser = async (userInfo) => {
 	const response = await fetch("http://localhost:3001/users", {
 		method: "POST",
@@ -44,7 +46,7 @@ const getUserInfo = async (jwt) => {
 		user && localStorage.removeItem("user");
 		jwt && localStorage.removeItem("jwt");
 
-		alert(jsonResponse.message);
+		EventBus.$emit("alert", jsonResponse.message);
 	}
 	return jsonResponse;
 };

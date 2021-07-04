@@ -71,6 +71,7 @@
 import Review from "./partials/Review";
 import { computed, onMounted, reactive, watch } from "@vue/composition-api";
 import RestaurantsService from "../../services/RestaurantsService";
+import { EventBus } from "@/main.js";
 
 export default {
 	components: {
@@ -111,7 +112,7 @@ export default {
 			});
 			state.dialog = !state.dialog;
 
-			alert(response.message);
+			EventBus.$emit("alert", response.message);
 		};
 		return {
 			state,

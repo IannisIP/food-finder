@@ -65,6 +65,8 @@
 <script>
 import { computed, reactive } from "@vue/composition-api";
 import RestaurantsService from "../../../services/RestaurantsService";
+import { EventBus } from "@/main.js";
+
 export default {
 	props: {
 		review: {
@@ -88,7 +90,7 @@ export default {
 				reason: state.reason,
 			});
 
-			alert(response.message);
+			EventBus.$emit("alert", response.message);
 		};
 
 		const sentiment = computed(() => {

@@ -8,6 +8,8 @@ import VueCompositionApi from "@vue/composition-api";
 Vue.use(VueCompositionApi);
 Vue.config.productionTip = false;
 
+export const EventBus = new Vue();
+
 new Vue({
 	vuetify,
 	router,

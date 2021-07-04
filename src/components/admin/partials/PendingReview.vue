@@ -163,6 +163,7 @@ import { reactive, watch } from "@vue/composition-api";
 import RestaurantsService from "../../../services/RestaurantsService";
 import "vue-inner-image-zoom/lib/vue-inner-image-zoom.css";
 import InnerImageZoom from "vue-inner-image-zoom";
+import { EventBus } from "@/main.js";
 
 export default {
 	props: {
@@ -219,8 +220,6 @@ export default {
 						.join(".")
 						.replace(/\./g, "-");
 
-					// originalDate = new Date(originalDate);
-					// state.receiptDate = originalDate.toISOString();
 					state.receiptDate = originalDate;
 				}
 
@@ -252,9 +251,11 @@ export default {
 				!receiptParams.receiptNumber &&
 				!receiptParams.receiptTime
 			) {
-				console.alert(
+				EventBus.$emit(
+					"alert",
 					"Receipt Data, Receipt Time, Receipt Number must be completed."
 				);
+
 				return;
 			}
 

@@ -139,6 +139,7 @@
 <script>
 import { computed, reactive } from "@vue/composition-api";
 import AccountService from "../../services/AccountService";
+import { EventBus } from "@/main.js";
 
 export default {
 	name: "Login",
@@ -201,7 +202,7 @@ export default {
 					context.root.$store.commit("SET_USER", response.user);
 					context.emit("changeDialog");
 				} else {
-					alert("Wrong username or password!");
+					EventBus.$emit("alert", "Wrong username or password!");
 				}
 			}
 		};

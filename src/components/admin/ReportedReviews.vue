@@ -23,6 +23,8 @@ import ReportedReview from "./partials/ReportedReview.vue";
 import RestaurantService from "../../services/RestaurantsService";
 import LoadingOverlay from "../../shared-components/LoadingOverlay.vue";
 import RestaurantsService from "../../services/RestaurantsService";
+import { EventBus } from "@/main.js";
+
 export default {
 	components: { ReportedReview, LoadingOverlay },
 	setup() {
@@ -33,19 +35,18 @@ export default {
 			state.reportedReviews = await RestaurantService.getReportedReview();
 		});
 
-		//TODO:
 		const handleIgnore = async (pendingReviewId) => {
 			const response = await RestaurantsService.removeReported({
 				id: pendingReviewId,
 			});
 			state.reportedReviews = await RestaurantService.getReportedReview();
-			alert(response.message);
+			EventBus.$emit("alert", response.message);
 		};
 
 		const handleRemoveReview = async (data) => {
 			const response = await RestaurantsService.removeReview(data);
 			state.reportedReviews = await RestaurantService.getReportedReview();
-			alert(response.message);
+			EventBus.$emit("alert", response.message);
 		};
 
 		return { state, handleIgnore, handleRemoveReview };
