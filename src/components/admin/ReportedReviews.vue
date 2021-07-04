@@ -1,5 +1,8 @@
 <template>
 	<div class="ff-pending-container">
+		<div class="grey--text mb-2">
+			Font
+		</div>
 		<div class="header">{{ "Reported reviews" }}</div>
 		<div class="pending-reviews-container">
 			<reported-review

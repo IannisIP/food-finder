@@ -15,6 +15,7 @@
 		"leaflet": "^1.7.1",
 		"serve-static": "^1.14.1",
 		"vue": "^2.6.6",
+		"vue-inner-image-zoom": "^1.1.0",
 		"vue-router": "^3.2.0",
 		"vue2-leaflet": "^2.7.0",
 		"vuetify": "^2.2.11",

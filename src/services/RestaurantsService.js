@@ -168,7 +168,23 @@ const removeReview = async (data) => {
 	return response.json();
 };
 
+const getProcessedReceipt = async (pendingReviewId, signal) => {
+	const jwt = localStorage.getItem("jwt");
+	const response = await fetch(`http://localhost:3001/process-receipt`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			"x-access-token": jwt,
+		},
+		body: JSON.stringify({ pendingReviewId }),
+		signal: signal,
+	});
+
+	return response.json();
+};
+
 export default {
+	getProcessedReceipt,
 	getRestaurants,
 	getPendingReviews,
 	declinePendingReview,

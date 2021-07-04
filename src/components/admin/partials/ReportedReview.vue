@@ -3,26 +3,38 @@
 		<v-card class="mx-auto my-1" max-width="374">
 			<v-card-title>{{ review.name }}</v-card-title>
 			<v-card-text>
-				<div>
-					Reviewer:
-					{{
-						review.review.author["first_name"] +
-							" " +
-							review.review.author["last_name"]
-					}}
-				</div>
-				<div>Review: {{ review.review.text }}</div>
-				<div>Report reason: {{ review.reported.reason }}</div>
-				<br />
-				<div>
-					Reported by:
-					{{
-						review.reported.user["first_name"] +
-							" " +
-							review.reported.user["last_name"]
-					}}
-				</div>
-
+				<v-text-field
+					:value="
+						review.review.author['first_name'] +
+							' ' +
+							review.review.author['last_name']
+					"
+					label="Reviwer name"
+					readonly
+				></v-text-field>
+				<v-textarea
+					filled
+					label="Review"
+					auto-grow
+					readonly
+					:value="review.review.text"
+				></v-textarea>
+				<v-textarea
+					filled
+					label="Report reason"
+					auto-grow
+					readonly
+					:value="review.reported.reason"
+				></v-textarea>
+				<v-text-field
+					:value="
+						review.reported.user['first_name'] +
+							' ' +
+							review.reported.user['last_name']
+					"
+					label="Reported by"
+					readonly
+				></v-text-field>
 				<div class="btn-wrapper">
 					<v-btn @click="handlePreview" v-if="review.hasReceipt"
 						>Preview Receipt</v-btn

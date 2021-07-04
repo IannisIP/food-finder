@@ -3,7 +3,7 @@ import RestaurantsService from "../../services/RestaurantsService";
 export const actions = {
 	GET_RESTAURANTS: async ({ commit }) => {
 		commit("LOADING", true);
-		const restaurants = await RestaurantsService.getRestaurants("mockURL");
+		const restaurants = await RestaurantsService.getRestaurants();
 		commit("LOADING", false);
 		commit("SET_RESTAURANTS", restaurants);
 	},
