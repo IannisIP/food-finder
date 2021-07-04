@@ -1,6 +1,23 @@
 export const mutations = {
 	SET_RESTAURANTS(state, restaurants) {
-		state.restaurants = restaurants;
+		//dont allow duplicate restaurants
+		state.restaurants = [...state.restaurants, ...restaurants].filter(
+			(thing, index, self) =>
+				index ===
+				self.findIndex(
+					(t) =>
+						t.geometry.location.lat === thing.geometry.location.lat &&
+						t.geometry.location.lng === thing.geometry.location.lng
+				)
+		);
+	},
+	CLEAR_RESTAURANTS(state) {
+		//clear
+		state.restaurants = [];
+		state.propertiesOpen = false;
+		state.currentSelection = null;
+		state.loading = false;
+		state.map = null;
 	},
 	SET_REVIEWS(state, reviews) {
 		state.reviews = reviews;

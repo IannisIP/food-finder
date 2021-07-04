@@ -1,12 +1,19 @@
 <template>
 	<div class="ff-restaurant-list">
-		<diV v-for="restaurant in restaurants" :key="restaurant.id">
+		<v-text-field
+			solo
+			label="Search"
+			prepend-inner-icon="mdi-map-marker"
+			v-model="search"
+		></v-text-field>
+		<diV v-for="restaurant in filteredRestaurants" :key="restaurant.id">
 			<restaurant-card v-if="restaurant.rating" :restaurant="restaurant" />
 		</diV>
 	</div>
 </template>
 
 <script>
+import { computed, ref } from "@vue/composition-api";
 import RestaurantCard from "./RestaurantCard";
 
 export default {
@@ -17,6 +24,22 @@ export default {
 		restaurants: {
 			type: Array,
 		},
+	},
+	setup(props) {
+		const search = ref("");
+		const filteredRestaurants = computed(() => {
+			if (!search) {
+				return props.restaurants;
+			}
+
+			return props.restaurants.filter((restaurant) =>
+				restaurant.name.toLowerCase().includes(search.value.toLowerCase())
+			);
+		});
+		return {
+			filteredRestaurants,
+			search,
+		};
 	},
 };
 </script>

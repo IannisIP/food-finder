@@ -3,7 +3,11 @@
 		<v-card class="mx-auto my-1" max-width="374">
 			<v-card-title>{{ review.name }}</v-card-title>
 			<v-card-text>
-				<div>Review: {{ review.reviewText }}</div>
+				<v-text-field
+					:value="review.reviewText"
+					label="Review"
+					readonly
+				></v-text-field>
 			</v-card-text>
 		</v-card>
 	</div>

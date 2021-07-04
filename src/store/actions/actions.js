@@ -1,9 +1,9 @@
 import RestaurantsService from "../../services/RestaurantsService";
 
 export const actions = {
-	GET_RESTAURANTS: async ({ commit }) => {
+	GET_RESTAURANTS: async ({ commit }, payload) => {
 		commit("LOADING", true);
-		const restaurants = await RestaurantsService.getRestaurants();
+		const restaurants = await RestaurantsService.getRestaurants(payload);
 		commit("LOADING", false);
 		commit("SET_RESTAURANTS", restaurants);
 	},

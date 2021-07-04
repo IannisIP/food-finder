@@ -22,7 +22,6 @@ export default {
 	setup(props, { root }) {
 		onMounted(() => {
 			root.$store.dispatch("GET_RESTAURANTS");
-			//root.$store.dispatch("cart/GET_ORDER");
 		});
 	},
 };

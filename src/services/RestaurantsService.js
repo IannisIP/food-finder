@@ -1,16 +1,21 @@
-const getRestaurants = async () => {
-	const getLocations = async (position) => {
-		const response = await fetch(
-			`http://localhost:3001/restaurants/?lat=${position.coords.latitude}&lng=${position.coords.longitude}`
-		);
-		return response.json();
-	};
+const getLocations = async (position) => {
+	const response = await fetch(
+		`http://localhost:3001/restaurants/?lat=${position.coords.latitude}&lng=${position.coords.longitude}`
+	);
+	return response.json();
+};
 
-	const locations = await new Promise((resolve) => {
-		navigator?.geolocation?.getCurrentPosition((position) => {
-			resolve(getLocations(position));
+const getRestaurants = async (newPosition) => {
+	let locations;
+	if (newPosition) {
+		locations = await getLocations(newPosition);
+	} else {
+		locations = await new Promise((resolve) => {
+			navigator?.geolocation?.getCurrentPosition((position) => {
+				resolve(getLocations(position));
+			});
 		});
-	});
+	}
 
 	return locations;
 };

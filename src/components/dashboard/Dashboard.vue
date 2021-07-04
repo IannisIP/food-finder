@@ -31,6 +31,10 @@ export default {
 		const restaurants = computed(() => store.getters["GET_RESTAURANTS"]);
 		const properties = computed(() => store.getters["GET_PROPERTIES"]);
 
+		// onBeforeUnmount(() => {
+		// 	store.commit("CLEAR_RESTAURANTS");
+		// });
+
 		return {
 			restaurants,
 			properties,

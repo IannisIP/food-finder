@@ -6,6 +6,7 @@
 			:zoom="state.zoom"
 			:center="state.center"
 			@ready="saveRef()"
+			@mouseup="mouseup"
 			:options="{ zoomControl: false }"
 		>
 			<l-tile-layer :url="state.url"></l-tile-layer>
@@ -54,11 +55,19 @@ export default {
 			});
 		});
 
+		const mouseup = (e) => {
+			context.root.$store.dispatch("GET_RESTAURANTS", {
+				coords: {
+					latitude: parseFloat(e.latlng.lat.toFixed(7)),
+					longitude: parseFloat(e.latlng.lng.toFixed(7)),
+				},
+			});
+		};
 		const saveRef = () => {
 			store.dispatch("SET_MAP", context.refs.mapRef.mapObject);
 		};
 
-		return { state, saveRef };
+		return { state, saveRef, mouseup };
 	},
 };
 </script>
