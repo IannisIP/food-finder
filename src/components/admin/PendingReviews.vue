@@ -1,14 +1,16 @@
 <template>
 	<div class="ff-pending-container">
-		<div class="header">{{ "Pending reviews" }}</div>
-		<div class="pending-reviews-container">
-			<pending-review
-				v-for="(review, i) in state.pendingReviews"
-				:key="i"
-				:review="review"
-				@handleValidation="handleValidation($event)"
-				@handleDecline="handleDecline($event, 'id')"
-			/>
+		<div class="wrapper">
+			<div class="header">{{ "Pending reviews" }}</div>
+			<div class="pending-reviews-container">
+				<pending-review
+					v-for="(review, i) in state.pendingReviews"
+					:key="i"
+					:review="review"
+					@handleValidation="handleValidation($event)"
+					@handleDecline="handleDecline($event, 'id')"
+				/>
+			</div>
 		</div>
 		<loading-overlay v-if="!state.pendingReviews" />
 	</div>
@@ -53,10 +55,18 @@ export default {
 
 <style lang="scss" scoped>
 .ff-pending-container {
+	.wrapper {
+		margin-top: 30px;
+		.header {
+			font-size: 20px;
+			font-family: Avenir, Helvetica, Arial, sans-serif;
+		}
+	}
 	.pending-reviews-container {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
+		margin-top: 15px;
 		.ff-restaurant-card {
 			margin: 0px 5px 5px 5px;
 		}

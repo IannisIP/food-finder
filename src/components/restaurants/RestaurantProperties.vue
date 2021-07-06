@@ -11,7 +11,15 @@
 		<div class="ff-restaurant-details">
 			<div>{{ restaurant.formatted_address }}</div>
 			<div>{{ restaurant.international_phone_number }}</div>
-			<v-btn @click="handleAddReview">Add review</v-btn>
+			<v-btn
+				@click="handleAddReview"
+				v-if="user"
+				rounded
+				outlined
+				color="success"
+			>
+				<v-icon left>mdi-pencil </v-icon>Add review</v-btn
+			>
 		</div>
 		<div class="ff-restaurant-services-container">
 			<div v-for="(service, i) in restaurant.services" :key="i">
@@ -114,6 +122,9 @@ export default {
 
 			EventBus.$emit("alert", response.message);
 		};
+
+		const user = computed(() => store.getters["GET_USER"]);
+
 		return {
 			state,
 			restaurant,
@@ -124,6 +135,7 @@ export default {
 			},
 			handleAddReview,
 			handleSubmitReview,
+			user,
 		};
 	},
 };

@@ -9,16 +9,19 @@
 		<diV v-for="restaurant in filteredRestaurants" :key="restaurant.id">
 			<restaurant-card v-if="restaurant.rating" :restaurant="restaurant" />
 		</diV>
+
+		<no-results-found v-if="!filteredRestaurants.length" />
 	</div>
 </template>
 
 <script>
 import { computed, ref } from "@vue/composition-api";
 import RestaurantCard from "./RestaurantCard";
-
+import NoResultsFound from "../../shared-components/NoResultsFound.vue";
 export default {
 	components: {
 		RestaurantCard,
+		NoResultsFound,
 	},
 	props: {
 		restaurants: {

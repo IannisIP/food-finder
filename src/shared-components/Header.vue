@@ -157,9 +157,18 @@
 			<v-btn icon @click="openHistory" v-if="user">
 				<v-icon>mdi-history</v-icon>
 			</v-btn>
-			<v-btn icon @click="handleDialog">
+			<v-btn icon @click="handleDialog" v-if="!user">
 				<v-icon>mdi-account</v-icon>
 			</v-btn>
+
+			<v-btn icon @click="handleLogout" v-if="user">
+				<v-icon>mdi-logout-variant</v-icon>
+			</v-btn>
+			<div>
+				<div>
+					{{ user["first_name"] + " " + user["last_name"] }}
+				</div>
+			</div>
 
 			<login :dialog="state.dialog" @changeDialog="handleDialog" />
 		</v-app-bar>
@@ -201,6 +210,10 @@ export default {
 
 		const user = computed(() => store.getters["GET_USER"]);
 
+		const handleLogout = () => {
+			localStorage.removeItem("jwt");
+			window.location.reload();
+		};
 		return {
 			openHistory: () => {
 				router.push("/history/reviews");
@@ -220,6 +233,7 @@ export default {
 			state,
 			handleDialog,
 			user,
+			handleLogout,
 		};
 	},
 };

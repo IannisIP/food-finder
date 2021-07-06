@@ -1,17 +1,18 @@
 <template>
 	<div class="ff-pending-container">
-		<div class="grey--text mb-2">
-			Font
-		</div>
-		<div class="header">{{ "Reported reviews" }}</div>
-		<div class="pending-reviews-container">
-			<reported-review
-				v-for="(review, i) in state.reportedReviews"
-				:key="i"
-				:review="review"
-				@handleIgnore="handleIgnore($event, 'id')"
-				@handleRemoveReview="handleRemoveReview($event)"
-			/>
+		<div class="wrapper">
+			<div class="header">
+				{{ "Reported reviews" }}
+			</div>
+			<div class="pending-reviews-container">
+				<reported-review
+					v-for="(review, i) in state.reportedReviews"
+					:key="i"
+					:review="review"
+					@handleIgnore="handleIgnore($event, 'id')"
+					@handleRemoveReview="handleRemoveReview($event)"
+				/>
+			</div>
 		</div>
 		<loading-overlay v-if="!state.reportedReviews" />
 	</div>
@@ -56,10 +57,19 @@ export default {
 
 <style lang="scss" scoped>
 .ff-pending-container {
+	.wrapper {
+		margin-top: 30px;
+		.header {
+			font-size: 20px;
+			font-family: Avenir, Helvetica, Arial, sans-serif;
+		}
+	}
 	.pending-reviews-container {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
+		margin-top: 15px;
+
 		.ff-restaurant-card {
 			margin: 0px 5px 5px 5px;
 		}
