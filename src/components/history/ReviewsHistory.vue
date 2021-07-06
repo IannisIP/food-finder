@@ -13,6 +13,7 @@
 			</div>
 		</div>
 		<no-content-yet
+			:message="`Seems like you haven't added any reviews yet!`"
 			v-if="state.pendingReviews && state.pendingReviews.length === 0"
 		/>
 		<loading-overlay v-if="!state.pendingReviews" />
@@ -64,12 +65,5 @@ export default {
 	width: 200px;
 	margin-left: 5px;
 	margin-right: 5px;
-}
-
-::v-deep .icon-wrapper {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 }
 </style>

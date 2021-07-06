@@ -13,6 +13,10 @@
 				/>
 			</div>
 		</div>
+		<no-content-yet
+			:message="`No blacklisted user is present yet!`"
+			v-if="state.blockedUsers && state.blockedUsers.length === 0"
+		/>
 		<loading-overlay v-if="!state.blockedUsers" />
 	</div>
 </template>
@@ -23,9 +27,10 @@ import LoadingOverlay from "../../shared-components/LoadingOverlay.vue";
 import UsersService from "../../services/UsersService";
 import { EventBus } from "@/main.js";
 import BlockedUser from "./partials/BlockedUser.vue";
+import NoContentYet from "@/shared-components/NoContentYet.vue";
 
 export default {
-	components: { LoadingOverlay, BlockedUser },
+	components: { LoadingOverlay, BlockedUser, NoContentYet },
 	setup() {
 		const state = reactive({
 			blockedUsers: null,

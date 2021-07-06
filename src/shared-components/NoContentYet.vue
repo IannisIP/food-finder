@@ -34,14 +34,26 @@
 			</g>
 		</svg>
 		<div>
-			Seems like you haven't added any reviews yet!
+			{{ message }}
 		</div>
 	</div>
 </template>
 
+<script>
+export default {
+	props: {
+		message: {
+			type: String,
+		},
+	},
+};
+</script>
 <style lang="scss" scoped>
 .icon-wrapper {
-	margin: 0 auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 
 	svg {
 		width: 150px;

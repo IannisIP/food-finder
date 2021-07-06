@@ -14,6 +14,10 @@
 				/>
 			</div>
 		</div>
+		<no-content-yet
+			:message="`No review is reported yet!`"
+			v-if="state.reportedReviews && state.reportedReviews.length === 0"
+		/>
 		<loading-overlay v-if="!state.reportedReviews" />
 	</div>
 </template>
@@ -25,9 +29,10 @@ import RestaurantService from "../../services/RestaurantsService";
 import LoadingOverlay from "../../shared-components/LoadingOverlay.vue";
 import RestaurantsService from "../../services/RestaurantsService";
 import { EventBus } from "@/main.js";
+import NoContentYet from "@/shared-components/NoContentYet.vue";
 
 export default {
-	components: { ReportedReview, LoadingOverlay },
+	components: { ReportedReview, LoadingOverlay, NoContentYet },
 	setup() {
 		const state = reactive({
 			reportedReviews: null,
