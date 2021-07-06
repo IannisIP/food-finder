@@ -7,7 +7,7 @@
 			absolute
 			top
 			centered
-			color="red lighten-1"
+			:color="alertType"
 			rounded="pill"
 		>
 			<v-icon> mdi-alert-circle </v-icon> {{ alertMessage }}
@@ -39,13 +39,16 @@ export default {
 	setup(props, { root }) {
 		const snackbar = ref(false);
 		const alertMessage = ref("");
+		const alertType = ref("");
+
 		onMounted(() => {
 			root.$store.dispatch("GET_RESTAURANTS");
 		});
 
-		EventBus.$on("alert", (message) => {
+		EventBus.$on("alert", ({ message, type }) => {
 			snackbar.value = true;
 			alertMessage.value = message;
+			alertType.value = type === "error" ? "red lighten-1" : "success";
 
 			clearTimeout(timeout);
 			const timeout = setTimeout(() => {
@@ -56,6 +59,7 @@ export default {
 		return {
 			snackbar,
 			alertMessage,
+			alertType,
 		};
 	},
 };

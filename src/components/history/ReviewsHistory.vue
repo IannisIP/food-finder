@@ -12,6 +12,9 @@
 				/>
 			</div>
 		</div>
+		<no-content-yet
+			v-if="state.pendingReviews && state.pendingReviews.length === 0"
+		/>
 		<loading-overlay v-if="!state.pendingReviews" />
 	</div>
 </template>
@@ -21,9 +24,10 @@ import { onMounted, reactive } from "@vue/composition-api";
 import ReviewHistory from "./partials/ReviewHistory.vue";
 import RestaurantsService from "../../services/RestaurantsService";
 import LoadingOverlay from "../../shared-components/LoadingOverlay.vue";
+import NoContentYet from "@/shared-components/NoContentYet.vue";
 
 export default {
-	components: { ReviewHistory, LoadingOverlay },
+	components: { ReviewHistory, LoadingOverlay, NoContentYet },
 	setup() {
 		const state = reactive({
 			pendingReviews: null,
@@ -60,5 +64,12 @@ export default {
 	width: 200px;
 	margin-left: 5px;
 	margin-right: 5px;
+}
+
+::v-deep .icon-wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 </style>

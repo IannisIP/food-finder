@@ -162,10 +162,10 @@
 			</v-btn>
 
 			<v-btn icon @click="handleLogout" v-if="user">
-				<v-icon>mdi-logout-variant</v-icon>
+				<v-icon left>mdi-logout-variant</v-icon>
 			</v-btn>
 			<div>
-				<div>
+				<div v-if="user">
 					{{ user["first_name"] + " " + user["last_name"] }}
 				</div>
 			</div>

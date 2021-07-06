@@ -251,10 +251,11 @@ export default {
 				!receiptParams.receiptNumber &&
 				!receiptParams.receiptTime
 			) {
-				EventBus.$emit(
-					"alert",
-					"Receipt Data, Receipt Time, Receipt Number must be completed."
-				);
+				EventBus.$emit("alert", {
+					message:
+						"Receipt Data, Receipt Time, Receipt Number must be completed.",
+					type: "error",
+				});
 
 				return;
 			}

@@ -120,7 +120,7 @@ export default {
 			});
 			state.dialog = !state.dialog;
 
-			EventBus.$emit("alert", response.message);
+			EventBus.$emit("alert", response);
 		};
 
 		const user = computed(() => store.getters["GET_USER"]);

@@ -38,7 +38,7 @@ export default {
 			const response = await UsersService.unblockUser(data);
 			state.blockedUsers = await UsersService.getBlockedUsers();
 
-			EventBus.$emit("alert", response.message);
+			EventBus.$emit("alert", response);
 		};
 
 		return { state, handleUnblock };

@@ -41,13 +41,13 @@ export default {
 				id: pendingReviewId,
 			});
 			state.reportedReviews = await RestaurantService.getReportedReview();
-			EventBus.$emit("alert", response.message);
+			EventBus.$emit("alert", response);
 		};
 
 		const handleRemoveReview = async (data) => {
 			const response = await RestaurantsService.removeReview(data);
 			state.reportedReviews = await RestaurantService.getReportedReview();
-			EventBus.$emit("alert", response.message);
+			EventBus.$emit("alert", response);
 		};
 
 		return { state, handleIgnore, handleRemoveReview };

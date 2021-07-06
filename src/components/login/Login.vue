@@ -202,7 +202,10 @@ export default {
 					context.root.$store.commit("SET_USER", response.user);
 					context.emit("changeDialog");
 				} else {
-					EventBus.$emit("alert", "Wrong username or password!");
+					EventBus.$emit("alert", {
+						message: "Wrong username or password!",
+						type: "error",
+					});
 				}
 			}
 		};

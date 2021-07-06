@@ -37,7 +37,7 @@ export default {
 		const handleValidation = async (data) => {
 			const response = await RestaurantsService.acceptPendingReview(data);
 			state.pendingReviews = await RestaurantService.getPendingReviews();
-			EventBus.$emit("alert", response.message);
+			EventBus.$emit("alert", response);
 		};
 
 		const handleDecline = async (id) => {
@@ -45,7 +45,7 @@ export default {
 				id: id,
 			});
 			state.pendingReviews = await RestaurantService.getPendingReviews();
-			EventBus.$emit("alert", response.message);
+			EventBus.$emit("alert", response);
 		};
 
 		return { state, handleValidation, handleDecline };

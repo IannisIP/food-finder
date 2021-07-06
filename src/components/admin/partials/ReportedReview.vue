@@ -116,7 +116,7 @@ export default {
 				reason: reason.value,
 			});
 
-			EventBus.$emit("alert", response.message);
+			EventBus.$emit("alert", response);
 		};
 
 		const handleReport = () => {

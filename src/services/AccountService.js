@@ -46,7 +46,7 @@ const getUserInfo = async (jwt) => {
 		user && localStorage.removeItem("user");
 		jwt && localStorage.removeItem("jwt");
 
-		EventBus.$emit("alert", jsonResponse.message);
+		EventBus.$emit("alert", jsonResponse);
 	}
 	return jsonResponse;
 };

@@ -90,7 +90,7 @@ export default {
 				reason: state.reason,
 			});
 
-			EventBus.$emit("alert", response.message);
+			EventBus.$emit("alert", response);
 		};
 
 		const sentiment = computed(() => {
