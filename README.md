@@ -1,12 +1,5 @@
 # food-finder fe
 
-https://itessentials-basic-web-app.herokuapp.com/
-
-### Performance analysis
-
-Lighthouse Performance analysis is avaiable here:
-[https://htmlpreview.github.io/?https://github.com/IannisIP/it-essentials/blob/main/reports/itessentials-basic-web-app.herokuapp.com-20210109T120303.html]
-
 ## Project setup
 
 ```
